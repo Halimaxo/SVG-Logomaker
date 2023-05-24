@@ -13,6 +13,7 @@ const questions = [
     type: "input",
     name: "text",
     message: "Enter text for LOGO",
+    validate: (text) => text.length <= 3 || "Text has to be 3 letters long",
   },
   {
     type: "input",
@@ -37,32 +38,43 @@ function svg() {
     console.log(inputs);
     if (inputs.shape_of_logo === "Circle") {
       const circle = new Circle(inputs.shape_color);
-      createSvg(circle);
-      console.log(createSvg(circle));
-      renderSvg(createSvg(circle));
+      const textSvg = createTextSvg(inputs.text, inputs.text_color);
+      // console.log(textSvg);
+      // console.log(createSvg(circle));
+      renderSvg(createSvg(circle, textSvg));
     }
 
     if (inputs.shape_of_logo === "Square") {
       const square = new Square(inputs.shape_color);
       createSvg(square);
-      renderSvg(createSvg(square));
+      const textSvg = createTextSvg(inputs.text, inputs.text_color);
+      console.log(createSvg(square));
+      renderSvg(createSvg(square, textSvg));
     }
 
     if (inputs.shape_of_logo === "Triangle") {
       const triangle = new Triangle(inputs.shape_color);
       createSvg(triangle);
-      renderSvg(createSvg(triangle));
+      const textSvg = createTextSvg(inputs.text, inputs.text_color);
+      renderSvg(createSvg(triangle, textSvg));
     }
   });
 }
 
-function createSvg(shape) {
-  return `<svg width="100" height="100"> 
-  ${shape.render()}
+function createSvg(shape, text) {
+  return `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  ${shape.render()} 
+  ${text}
   </svg>`;
 }
 
+function createTextSvg(text, text_color) {
+  return `<text x="116" y="115" font-size="55" fill="${text_color}">
+  ${text}
+  </text>`;
+}
+
 function renderSvg(shapeSvg) {
-  fs.writeFileSync("./test.svg", shapeSvg);
+  fs.writeFileSync("./test2.svg", shapeSvg);
 }
 svg();
