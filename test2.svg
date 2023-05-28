@@ -1,6 +1,6 @@
 <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="150" cy="100" r="80" fill="blue"/> 
-  <text x="116" y="115" font-size="55" fill="pink">
-  pin
+  <polygon points="150,18 244,182 56,182" fill="pink" /> 
+  <text x="116" y="115" font-size="55" fill="white">
+  hks
   </text>
   </svg>
